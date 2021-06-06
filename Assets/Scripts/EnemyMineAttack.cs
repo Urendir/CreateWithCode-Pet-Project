@@ -51,6 +51,7 @@ public class EnemyMineAttack : MonoBehaviour
     {
         if(isAggravated)
         {
+            attackRange = 100;
             transform.LookAt(Vector3.Lerp(transform.position, player.transform.position, speedOfRotationOnAttack));
             transform.position += transform.forward * attackSpeed * Time.deltaTime;
             GetComponent<Animator>().SetBool("isAggroed", true);

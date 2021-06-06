@@ -14,7 +14,7 @@ public class EnergyReserves : MonoBehaviour
         currentEnergy = maxEnergy;
     }
     
-    public void AddEnergy(int energyToAdd)
+    public void AddEnergy(float energyToAdd)
     {
         currentEnergy = Mathf.Max(currentEnergy+energyToAdd, maxEnergy);
     }
