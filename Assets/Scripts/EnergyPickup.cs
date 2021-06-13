@@ -16,15 +16,18 @@ public class EnergyPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        playerEnergy = other.gameObject.GetComponent<EnergyReserves>();
+        //playerEnergy = other.gameObject.GetComponent<EnergyReserves>();
+        playerEnergy = FindObjectOfType<EnergyReserves>();
 
         if(playerEnergy !=null)
         {
             playerEnergy.AddEnergy(energyToAdd);
+            Debug.Log("Adding Energy to Energy System:" + energyToAdd);
             Destroy(gameObject);
         }
         else
         {
+            Debug.Log("EnergyReserves not found. Destroying Object");
             Destroy(gameObject);
         }
     }

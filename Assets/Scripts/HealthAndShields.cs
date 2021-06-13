@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HealthAndShields : MonoBehaviour
@@ -9,6 +10,8 @@ public class HealthAndShields : MonoBehaviour
     [SerializeField] int currentShield;
     [SerializeField] float shieldRegenDelay = 2f;
     [SerializeField] int shieldRegenAmount = 2;
+    [SerializeField] TextMeshProUGUI healthDisplay;
+    [SerializeField] TextMeshProUGUI shieldDisplay;
 
     
     
@@ -16,6 +19,9 @@ public class HealthAndShields : MonoBehaviour
     {
         currentShield = maxShieldPoints;
         StartCoroutine(IncreaseShields());
+        UpdateShieldUI();
+        UpdateHealthUI();
+        
     }
 
     IEnumerator IncreaseShields()
@@ -25,6 +31,7 @@ public class HealthAndShields : MonoBehaviour
             if(currentShield< maxShieldPoints)
             {
                 currentShield += shieldRegenAmount;
+                UpdateShieldUI();
                 yield return new WaitForSeconds(shieldRegenDelay);
             }
             else
@@ -43,23 +50,32 @@ public class HealthAndShields : MonoBehaviour
         if(currentShield-damageTaken > 0)
         {
             currentShield -= damageTaken;
+            UpdateShieldUI();
         } 
         else if(currentShield-damageTaken <0)
         {
             intermediateDamage = damageTaken-currentShield;
             currentShield = Mathf.Max(0, currentShield-damageTaken);
-            Debug.Log("Current Shields: " + currentShield + " Current Health:" + healthPoints);
-            Debug.Log("Substracting Damage from health: " + intermediateDamage);
             healthPoints -= intermediateDamage;
-            Debug.Log("Current Shields: " + currentShield + " Current Health:" + healthPoints);
+            UpdateShieldUI();
+            UpdateHealthUI();
         }
 
         if(healthPoints <= 0)
         {
-            Debug.Log("Current Shields: " + currentShield + " Current Health:" + healthPoints);
-            Debug.Log("Game Over.");
+            UpdateHealthUI();
             Destroy(gameObject);
         }
+    }
+
+    void UpdateShieldUI()
+    {
+        shieldDisplay.text = "Shield Power:" + currentShield;
+    }
+
+    void UpdateHealthUI()
+    {
+        healthDisplay.text = "Hull Integrity: " + healthPoints;
     }
 
 
