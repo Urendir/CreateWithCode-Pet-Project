@@ -8,8 +8,7 @@ public class EnergyReserves : MonoBehaviour
     [SerializeField] float maxEnergy = 100;
     [SerializeField] float currentEnergy;
     [SerializeField] TextMeshProUGUI energyUIText;
-
-
+ 
 
     private void Start() 
     {
