@@ -19,16 +19,13 @@ public class PlayerController : MonoBehaviour
     bool reverseThrustActive = false;
     bool navigationalThrustActive = false;
 
-    private void Start() {
+    private void Start() 
+    {
         myRigidBody = GetComponent<Rigidbody>();
         playerEnergy = GetComponent<EnergyReserves>();
         // StartCoroutine(ConsumeEnergyMainThruster());
         // StartCoroutine(ConsumeEnergySmallThruster());
-
     }
-
-
-
 
     private void Update()
     {
@@ -41,9 +38,6 @@ public class PlayerController : MonoBehaviour
             ProcessRotation();
         }
     }
-
-
-
 
     private void ForwardMovement()
     {
@@ -59,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-        private void BackwardMovement()
+    private void BackwardMovement()
     {
         if (Input.GetKey(KeyCode.S))
         {
@@ -73,16 +67,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    void ProcessRotation()
+    private void ProcessRotation()
     {
-
         if(Input.GetKey(KeyCode.A))
         {
             isRotating = true;
             navigationalThrustActive = true;
             LateralMovement(lateralThrust);
-        } else if(Input.GetKey(KeyCode.D))
+        } 
+        else if(Input.GetKey(KeyCode.D))
         {
             isRotating = true;
             navigationalThrustActive = true;
@@ -93,15 +86,10 @@ public class PlayerController : MonoBehaviour
             isRotating = false;
             navigationalThrustActive = false;
         }
-
-
     }
 
-
-
-    void LateralMovement(float rotationMultiplier)
+    private void LateralMovement(float rotationMultiplier)
     {
-        
         if(isRotating)
         {
             myRigidBody.freezeRotation = true;
@@ -109,9 +97,7 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.forward * rotationMultiplier * Time.deltaTime);
             myRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         }
-
     }
-
 
     IEnumerator ConsumeEnergySmallThruster()
     {
@@ -131,13 +117,11 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-
-    private void OnCollisionEnter(Collision other) {
+    private void OnCollisionEnter(Collision other) 
+    {
         collisionVelocityMagnitude = myRigidBody.velocity.magnitude;
         int collisionDamage = (int) collisionVelocityMagnitude * 3;
         GetComponent<HealthAndShields>().DecreaseHealth(collisionDamage);
         Debug.Log("Damage taken from collision:" + collisionDamage);
     }
-
-
 }

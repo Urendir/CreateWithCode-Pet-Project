@@ -8,9 +8,12 @@ public class ObjectOscillation : MonoBehaviour
     [SerializeField][Tooltip("Provides the destination point for the object.")]
             Vector3 destinationVector;
     [SerializeField][Tooltip("Provides the duration for one back-and-forth journey. Increasing this will increase the speed of the object.")]
-            [Range(0.2f, 60f)]float timeToFullyCycle = 6f; 
+            [Range(0.2f, 60f)]
+            float timeToFullyCycle = 6f; 
+
     [SerializeField][Tooltip("Provides an initial offset from the starting position of the movement. Intended to be used when multiple oscillating objects should move asyncroniously to each other")]
-            [Range(0.0f, 60f)]float delayTimer = 0.0f; 
+            [Range(0.0f, 60f)]
+            float delayTimer = 0.0f; 
 
     Vector3 startingPosition;
     float movementFactor;   
@@ -27,7 +30,10 @@ public class ObjectOscillation : MonoBehaviour
 
     private void Oscillate()
     {
-        if (timeToFullyCycle <= Mathf.Epsilon) { return; }
+        if (timeToFullyCycle <= Mathf.Epsilon) 
+        { 
+            return; 
+        }
 
         float elapsedCycles = (delayTimer + Time.time) / timeToFullyCycle; // Count of cycles is continually growing over time.
         const float tau = Mathf.PI * 2;     // this is a constant of 3.1415*2, so 6.283....

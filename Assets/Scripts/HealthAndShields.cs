@@ -6,14 +6,13 @@ using UnityEngine;
 public class HealthAndShields : MonoBehaviour
 {
     [SerializeField] int healthPoints = 100;
-    int maxShieldPoints = 50;
     [SerializeField] int currentShield;
     [SerializeField] float shieldRegenDelay = 2f;
     [SerializeField] int shieldRegenAmount = 2;
     [SerializeField] TextMeshProUGUI healthDisplay;
     [SerializeField] TextMeshProUGUI shieldDisplay;
 
-    
+    int maxShieldPoints = 50;    
     
     void Start()
     {
